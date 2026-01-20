@@ -14,6 +14,7 @@ public class AuthUIController : MonoBehaviour
     [SerializeField] private TMP_InputField loginPassword;
     [SerializeField] private Button loginButton;
     [SerializeField] private Button goRegisterButton;
+    [SerializeField] private Button quitButton;
 
     [Header("Register UI")]
     [SerializeField] private TMP_InputField registerUsername;
@@ -40,6 +41,7 @@ public class AuthUIController : MonoBehaviour
 
         loginButton.onClick.AddListener(OnLoginClicked);
         goRegisterButton.onClick.AddListener(ShowRegister);
+        quitButton.onClick.AddListener(OnQuitClicked);
         registerNowButton.onClick.AddListener(OnRegisterClicked);
         backButton.onClick.AddListener(ShowLogin);
     }
@@ -130,5 +132,14 @@ public class AuthUIController : MonoBehaviour
         registerUsername.text = string.Empty;
         registerPassword.text = string.Empty;
         registerConfirm.text = string.Empty;
+    }
+
+    private void OnQuitClicked()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
